@@ -7,6 +7,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 import Modal from '@/app/components/modals/Modal';
 import Heading from '@/app/components/Heading';
+import Input from '@/app/components/inputs/Input';
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
@@ -46,6 +47,31 @@ const RegisterModal = () => {
       <Heading
         title='Witaj w Airbnb'
         subtitle='Zarejestruj się!'
+      />
+      <Input
+        id='email'
+        label='Adres email'
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
+        id='name'
+        label='Nazwa użytkownika'
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
+        id='password'
+        type='password'
+        label='Hasło'
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
       />
     </div>
   );

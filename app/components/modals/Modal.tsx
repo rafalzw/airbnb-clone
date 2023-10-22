@@ -113,7 +113,8 @@ const Modal: React.FC<ModalProps> = (
             h-full
             lg:h-auto
             md:h-autoborder-0
-            rounded-lgshadow-lg
+            rounded-lg
+            shadow-lg
             relative
             flex
             flex-col
