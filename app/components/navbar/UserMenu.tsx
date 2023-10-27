@@ -6,8 +6,13 @@ import Avatar from '../Avatar';
 import MenuItem from './MenuItem';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 import useLoginModal from '@/app/hooks/useLoginModal';
+import { SafeUser } from '@/app/types';
 
-const UserMenu = () => {
+interface UserMenuProps {
+  currentUser?: SafeUser | null;
+}
+
+const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const [isOpen, setIsOpen] = useState(false);
@@ -78,16 +83,46 @@ const UserMenu = () => {
             '
         >
           <div className='flex flex-col cursor-pointer'>
-            <>
-              <MenuItem
-                onClick={registerModal.onOpen}
-                label='Zarejestruj'
-              />
-              <MenuItem
-                onClick={loginModal.onOpen}
-                label='Zaloguj'
-              />
-            </>
+            {currentUser ? (
+              <>
+                <MenuItem
+                  onClick={() => {}}
+                  label='Moje podróże'
+                />
+                <MenuItem
+                  onClick={() => {}}
+                  label='Ulubione'
+                />
+                <MenuItem
+                  onClick={() => {}}
+                  label='Moje rezerwacje'
+                />
+                <MenuItem
+                  onClick={() => {}}
+                  label='Wynajmij swój dom'
+                />
+                <MenuItem
+                  onClick={() => {}}
+                  label='Konto'
+                />
+                <MenuItem
+                  onClick={() => {}}
+                  label='Wyloguj'
+                />
+              </>
+              ): (
+              <>
+                <MenuItem
+                  onClick={registerModal.onOpen}
+                  label='Zarejestruj'
+                />
+                <MenuItem
+                  onClick={loginModal.onOpen}
+                  label='Zaloguj'
+                />
+              </>
+              )
+            }
           </div>
         </div>
       )}
