@@ -5,7 +5,6 @@ import { signIn } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillFacebook } from 'react-icons/ai';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-
 import Modal from '@/app/components/modals/Modal';
 import Heading from '@/app/components/Heading';
 import Input from '@/app/components/inputs/Input';
@@ -87,8 +86,7 @@ const LoginModal = () => {
         outline
         label='Kontynuuj, używając Google'
         icon={FcGoogle}
-        onClick={() => {
-        }}
+        onClick={() => signIn('google')}
       />
       <Button
         outline
