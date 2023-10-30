@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
-import { AiFillFacebook } from 'react-icons/ai';
+import { AiFillGithub } from 'react-icons/ai';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Modal from '@/app/components/modals/Modal';
 import Heading from '@/app/components/Heading';
@@ -90,10 +90,9 @@ const LoginModal = () => {
       />
       <Button
         outline
-        label='Kontynuuj, używając Facebooka'
-        icon={AiFillFacebook}
-        onClick={() => {
-        }}
+        label='Kontynuuj, używając Github'
+        icon={AiFillGithub}
+        onClick={() => signIn('github')}
       />
       <div
         className='
