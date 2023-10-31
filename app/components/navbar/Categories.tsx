@@ -2,10 +2,23 @@
 
 import React from 'react';
 import Container from '../Container';
-import { TbBeach, TbPool } from 'react-icons/tb';
+import { TbBeach, TbMountain, TbPool } from 'react-icons/tb';
 import { MdOutlineVilla } from 'react-icons/md';
 import CategoryBox from '../CategoryBox';
 import { usePathname, useSearchParams } from 'next/navigation';
+import {
+  GiBarn,
+  GiBoatFishing,
+  GiCactus,
+  GiCastle,
+  GiCaveEntrance,
+  GiForestCamp,
+  GiIsland,
+  GiWindmill,
+} from 'react-icons/gi';
+import { FaSkiing } from 'react-icons/fa';
+import { BsSnow } from 'react-icons/bs';
+import { IoDiamond } from 'react-icons/io5';
 
 export const categories = [
   {
@@ -23,6 +36,66 @@ export const categories = [
     icon: TbPool,
     description: 'Nieruchomości z basenem!',
   },
+  {
+    label: 'Na wsi',
+    icon: TbMountain,
+    description: ''
+  },
+  {
+    label: 'Wiatraki',
+    icon: GiWindmill,
+    description: '',
+  },
+  {
+    label: 'Wyspy',
+    icon: GiIsland,
+    description: ''
+  },
+  {
+    label: 'Nad jeziorem',
+    icon: GiBoatFishing,
+    description: ''
+  },
+  {
+    label: 'Przy stoku',
+    icon: FaSkiing,
+    description: ''
+  },
+  {
+    label: 'Zamki',
+    icon: GiCastle,
+    description: ''
+  },
+  {
+    label: 'Jaskinie',
+    icon: GiCaveEntrance,
+    description: ''
+  },
+  {
+    label: 'Kemping',
+    icon: GiForestCamp,
+    description: ''
+  },
+  {
+    label: 'Arktyczne',
+    icon: BsSnow,
+    description: ''
+  },
+  {
+    label: 'Pustynia',
+    icon: GiCactus,
+    description: ''
+  },
+  {
+    label: 'Stodoły',
+    icon: GiBarn,
+    description: ''
+  },
+  {
+    label: 'Luxe',
+    icon: IoDiamond,
+    description: ''
+  }
 
 ];
 
