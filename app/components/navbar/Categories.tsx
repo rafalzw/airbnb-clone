@@ -4,6 +4,7 @@ import React from 'react';
 import Container from '../Container';
 import { TbBeach, TbPool } from 'react-icons/tb';
 import { MdOutlineVilla } from 'react-icons/md';
+import CategoryBox from '../CategoryBox';
 
 export const categories = [
   {
@@ -38,7 +39,12 @@ const Categories = () => {
         '
       >
         {categories.map((item) => (
-          <div key={item.label}>{item.label}</div>
+          <CategoryBox
+            key={item.label}
+            label={item.label}
+            description={item.description}
+            icon={item.icon}
+          />
         ))}
       </div>
     </Container>
