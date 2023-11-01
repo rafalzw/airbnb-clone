@@ -22,12 +22,19 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     setIsOpen(value => !value);
   }, []);
 
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+
+
+  }, [currentUser, loginModal]);
+
   return (
     <div className='relative'>
       <div className='flex flex-row items-center gap-3'>
         <div
-          onClick={() => {
-          }}
+          onClick={onRent}
           className='
             hidden
             md:block
@@ -63,7 +70,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
         >
           <AiOutlineMenu />
           <div className='hidden md:block'>
-            <Avatar src={currentUser?.image}/>
+            <Avatar src={currentUser?.image} />
           </div>
         </div>
       </div>
@@ -87,23 +94,28 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             {currentUser ? (
               <>
                 <MenuItem
-                  onClick={() => {}}
+                  onClick={() => {
+                  }}
                   label='Moje podróże'
                 />
                 <MenuItem
-                  onClick={() => {}}
+                  onClick={() => {
+                  }}
                   label='Ulubione'
                 />
                 <MenuItem
-                  onClick={() => {}}
+                  onClick={() => {
+                  }}
                   label='Moje rezerwacje'
                 />
                 <MenuItem
-                  onClick={() => {}}
+                  onClick={() => {
+                  }}
                   label='Wynajmij swój dom'
                 />
                 <MenuItem
-                  onClick={() => {}}
+                  onClick={() => {
+                  }}
                   label='Konto'
                 />
                 <MenuItem
@@ -111,7 +123,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                   label='Wyloguj'
                 />
               </>
-              ): (
+            ) : (
               <>
                 <MenuItem
                   onClick={registerModal.onOpen}
@@ -122,7 +134,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                   label='Zaloguj'
                 />
               </>
-              )
+            )
             }
           </div>
         </div>
