@@ -104,7 +104,7 @@ const LoginModal = () => {
       >
         <div className='flex flex-row justify-center items-center gap-2'>
           <div>
-            Masz już konto?
+            Pierwszy raz na Airbnb?
           </div>
           <div
             onClick={loginModal.onClose}
@@ -114,7 +114,7 @@ const LoginModal = () => {
               hover:underline
           '
           >
-            Zaloguj się
+            Zarejestruj się
           </div>
         </div>
       </div>
