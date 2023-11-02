@@ -7,6 +7,7 @@ import Heading from '@/app/components/Heading';
 import { categories } from '@/app/components/navbar/Categories';
 import CategoryInput from '@/app/components/inputs/CategoryInput';
 import { FieldValues, useForm } from 'react-hook-form';
+import CountrySelect from '@/app/components/inputs/CountrySelect';
 
 enum STEPS {
   CATEGORY = 0,
@@ -46,6 +47,7 @@ const RentModal = () => {
   });
 
   const category = watch('category');
+  const location = watch('location');
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -114,6 +116,10 @@ const RentModal = () => {
         <Heading
           title='Gdzie znajduje się nieruchomość?'
           subtitle='Pomóż gością Cię znaleźć!'
+        />
+        <CountrySelect
+          value={location}
+          onChange={(value) => setCustomValue('location', value)}
         />
       </div>
     )
