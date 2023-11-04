@@ -133,6 +133,19 @@ const RentModal = () => {
     );
   }
 
+  if (step === STEPS.INFO) {
+    bodyContent = (
+      <div className='flex flex-col gap-8'>
+        <Heading
+          title='Podziel się podstawowymi informacjami o swoim miejscu'
+          subtitle='Jakie są udogodnienia?'
+        />
+
+      </div>
+    );
+  }
+
+
   return (
     <Modal
       isOpen={rentModal.isOpen}
