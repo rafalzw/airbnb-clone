@@ -11,6 +11,7 @@ import CountrySelect from '@/app/components/inputs/CountrySelect';
 import dynamic from 'next/dynamic';
 import Counter from '@/app/components/inputs/Counter';
 import ImageUpload from '@/app/components/inputs/ImageUpload';
+import Input from '@/app/components/inputs/Input';
 
 enum STEPS {
   CATEGORY = 0,
@@ -24,6 +25,7 @@ enum STEPS {
 const RentModal = () => {
   const rentModal = useRentModal();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.CATEGORY);
 
   const {
@@ -184,6 +186,34 @@ const RentModal = () => {
         />
       </div>
     );
+  }
+
+  if (step === STEPS.DESCRIPTION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Jak opisałbyś(ałabyś) swoje miejsce?"
+          subtitle="Krótko i zwięźle - działa najlepiej!"
+        />
+        <Input
+          id="title"
+          label="Title"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <hr />
+        <Input
+          id="description"
+          label="Description"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+      </div>
+    )
   }
 
 
