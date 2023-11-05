@@ -1,17 +1,20 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Modal from '@/app/components/modals/Modal';
 import useRentModal from '@/app/hooks/useRentModal';
 import Heading from '@/app/components/Heading';
 import { categories } from '@/app/components/navbar/Categories';
 import CategoryInput from '@/app/components/inputs/CategoryInput';
-import { FieldValues, useForm } from 'react-hook-form';
 import CountrySelect from '@/app/components/inputs/CountrySelect';
 import dynamic from 'next/dynamic';
 import Counter from '@/app/components/inputs/Counter';
 import ImageUpload from '@/app/components/inputs/ImageUpload';
 import Input from '@/app/components/inputs/Input';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 enum STEPS {
   CATEGORY = 0,
@@ -23,6 +26,7 @@ enum STEPS {
 }
 
 const RentModal = () => {
+  const router = useRouter();
   const rentModal = useRentModal();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -60,7 +64,7 @@ const RentModal = () => {
 
   const Map = useMemo(() => dynamic(() => import('../Map'), {
     ssr: false,
-  }), [location]);
+  }),[location]);
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -76,6 +80,29 @@ const RentModal = () => {
   const onNext = () => {
     setStep((value) => value + 1);
   };
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    if (step !== STEPS.PRICE) {
+      return onNext();
+    }
+
+    setIsLoading(true);
+
+    axios.post('/api/listings', data)
+      .then(() => {
+        toast.success('Ogłoszenie zostało dodane!');
+        router.refresh();
+        reset();
+        setStep(STEPS.CATEGORY)
+        rentModal.onClose();
+      })
+      .catch(() => {
+        toast.error('Coś poszło nie tak.');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
+  }
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.PRICE) {
@@ -190,14 +217,14 @@ const RentModal = () => {
 
   if (step === STEPS.DESCRIPTION) {
     bodyContent = (
-      <div className="flex flex-col gap-8">
+      <div className='flex flex-col gap-8'>
         <Heading
-          title="Jak opisałbyś(ałabyś) swoje miejsce?"
-          subtitle="Krótko i zwięźle - działa najlepiej!"
+          title='Jak opisałbyś(ałabyś) swoje miejsce?'
+          subtitle='Krótko i zwięźle - działa najlepiej!'
         />
         <Input
-          id="title"
-          label="Title"
+          id='title'
+          label='Title'
           disabled={isLoading}
           register={register}
           errors={errors}
@@ -205,43 +232,43 @@ const RentModal = () => {
         />
         <hr />
         <Input
-          id="description"
-          label="Description"
+          id='description'
+          label='Description'
           disabled={isLoading}
           register={register}
           errors={errors}
           required
         />
       </div>
-    )
+    );
   }
 
   if (step === STEPS.PRICE) {
     bodyContent = (
-      <div className="flex flex-col gap-8">
+      <div className='flex flex-col gap-8'>
         <Heading
-          title="Teraz ustal swoją cenę"
-          subtitle="Ile wynosi opłata za noc?"
+          title='Teraz ustal swoją cenę'
+          subtitle='Ile wynosi opłata za noc?'
         />
         <Input
-          id="price"
-          label="Price"
+          id='price'
+          label='Price'
           formatPrice
-          type="number"
+          type='number'
           disabled={isLoading}
           register={register}
           errors={errors}
           required
         />
       </div>
-    )
+    );
   }
 
   return (
     <Modal
       isOpen={rentModal.isOpen}
       onClose={rentModal.onClose}
-      onSubmit={onNext}
+      onSubmit={handleSubmit(onSubmit)}
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
