@@ -1,11 +1,13 @@
+import getCurrentUser from './actions/getCurrentUser';
 import getListings from './actions/getListings';
 import ClientOnly from './components/ClientOnly';
 import Container from './components/Container';
 import EmptyState from './components/EmptyState';
+import ListingCard from './components/listings/ListingCard';
 
 export default async function Home() {
   const listings = await getListings();
-  const isEmpty = true;
+  const currentUser = await getCurrentUser();
 
   if (listings.length === 0) {
     return (
@@ -31,7 +33,15 @@ export default async function Home() {
               gap-8
         '
         >
-          <div>Moje ogłoszenie</div>
+          {listings.map((listing) => {
+            return (
+              <ListingCard
+                currentUser={currentUser}
+                key={listing.id}
+                data={listing}
+              />
+            );
+          })}
         </div>
       </Container>
     </ClientOnly>
