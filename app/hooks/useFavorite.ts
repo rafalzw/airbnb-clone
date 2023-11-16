@@ -38,7 +38,7 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
         }
         await request();
         router.refresh();
-        toast.success('Dodano do ulubionych.');
+        toast.success('👍');
       } catch (error) {
         toast.error('Coś poszło nie tak.');
       }
