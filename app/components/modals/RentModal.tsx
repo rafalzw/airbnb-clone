@@ -37,9 +37,7 @@ const RentModal = () => {
     handleSubmit,
     setValue,
     watch,
-    formState: {
-      errors,
-    },
+    formState: { errors },
     reset,
   } = useForm<FieldValues>({
     defaultValues: {
@@ -62,9 +60,13 @@ const RentModal = () => {
   const bathroomCount = watch('bathroomCount');
   const imageSrc = watch('imageSrc');
 
-  const Map = useMemo(() => dynamic(() => import('../Map'), {
-    ssr: false,
-  }),[location]);
+  const Map = useMemo(
+    () =>
+      dynamic(() => import('../Map'), {
+        ssr: false,
+      }),
+    [location],
+  );
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -88,12 +90,13 @@ const RentModal = () => {
 
     setIsLoading(true);
 
-    axios.post('/api/listings', data)
+    axios
+      .post('/api/listings', data)
       .then(() => {
         toast.success('Ogłoszenie zostało dodane!');
         router.refresh();
         reset();
-        setStep(STEPS.CATEGORY)
+        setStep(STEPS.CATEGORY);
         rentModal.onClose();
       })
       .catch(() => {
@@ -101,15 +104,15 @@ const RentModal = () => {
       })
       .finally(() => {
         setIsLoading(false);
-      })
-  }
+      });
+  };
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.PRICE) {
-      return 'Create';
+      return 'Dodaj';
     }
 
-    return 'Next';
+    return 'Dalej';
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
@@ -117,7 +120,7 @@ const RentModal = () => {
       return undefined;
     }
 
-    return 'Back';
+    return 'Wstecz';
   }, [step]);
 
   let bodyContent = (
@@ -137,7 +140,10 @@ const RentModal = () => {
         '
       >
         {categories.map((item) => (
-          <div key={item.label} className='col-span-1'>
+          <div
+            key={item.label}
+            className='col-span-1'
+          >
             <CategoryInput
               onClick={(category) => setCustomValue('category', category)}
               selected={category === item.label}
@@ -161,9 +167,7 @@ const RentModal = () => {
           value={location}
           onChange={(value) => setCustomValue('location', value)}
         />
-        <Map
-          center={location?.latlng}
-        />
+        <Map center={location?.latlng} />
       </div>
     );
   }
@@ -193,7 +197,6 @@ const RentModal = () => {
           value={bathroomCount}
           onChange={(value) => setCustomValue('bathroomCount', value)}
         />
-
       </div>
     );
   }
