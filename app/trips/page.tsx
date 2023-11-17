@@ -3,6 +3,7 @@ import ClientOnly from '@/app/components/ClientOnly';
 
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import getReservations from '@/app/actions/getReservations';
+import TripsClient from './TripsClient';
 
 const TripsPage = async () => {
   const currentUser = await getCurrentUser();
@@ -31,7 +32,14 @@ const TripsPage = async () => {
     );
   }
 
-  return <ClientOnly>Trips client</ClientOnly>;
+  return (
+    <ClientOnly>
+      <TripsClient
+        reservations={reservations}
+        currentUser={currentUser}
+      />
+    </ClientOnly>
+  );
 };
 
 export default TripsPage;
