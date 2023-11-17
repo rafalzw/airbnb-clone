@@ -75,7 +75,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
       .then(() => {
         toast.success('Pomyślnie zarezerwowano!');
         setDateRange(initialDateRange);
-        // Redirect to /trips
+        router.push('/trips');
       })
       .catch(() => {
         toast.error('Coś poszło nie tak.');
