@@ -3,9 +3,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Range } from 'react-date-range';
 import { differenceInDays, eachDayOfInterval } from 'date-fns';
-import { Reservation } from '.prisma/client';
 import { useRouter } from 'next/navigation';
-import { SafeListings, SafeUser } from '@/app/types';
+import { SafeListing, SafeReservation, SafeUser } from '@/app/types';
 import { categories } from '@/app/components/navbar/Categories';
 import Container from '@/app/components/Container';
 import ListingHead from '@/app/components/listings/ListingHead';
@@ -22,8 +21,8 @@ const initialDateRange = {
 };
 
 interface ListingClientProps {
-  reservations?: Reservation[];
-  listing: SafeListings & {
+  reservations?: SafeReservation[];
+  listing: SafeListing & {
     user: SafeUser;
   };
   currentUser?: SafeUser | null;
