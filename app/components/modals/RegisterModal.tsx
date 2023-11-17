@@ -23,9 +23,7 @@ const RegisterModal = () => {
   const {
     register,
     handleSubmit,
-    formState: {
-      errors,
-    },
+    formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
       name: '',
@@ -37,9 +35,12 @@ const RegisterModal = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
-    axios.post('/api/register', data)
+    axios
+      .post('/api/register', data)
       .then(() => {
+        toast.success('Pomyślnie zarejestrowano');
         registerModal.onClose();
+        loginModal.onOpen();
       })
       .catch(() => {
         toast.error('Coś poszło nie tak.');
@@ -112,9 +113,7 @@ const RegisterModal = () => {
         '
       >
         <div className='flex flex-row justify-center items-center gap-2'>
-          <div>
-            Masz już konto?
-          </div>
+          <div>Masz już konto?</div>
           <div
             onClick={toggle}
             className='
