@@ -3,9 +3,8 @@ import ClientOnly from '@/app/components/ClientOnly';
 
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import getReservations from '@/app/actions/getReservations';
-import TripsClient from './TripsClient';
 
-const TripsPage = async () => {
+const ReservationsPage = async () => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
@@ -19,27 +18,20 @@ const TripsPage = async () => {
     );
   }
 
-  const reservations = await getReservations({ userId: currentUser.id });
+  const reservations = await getReservations({ authorId: currentUser.id });
 
   if (reservations.length === 0) {
     return (
       <ClientOnly>
         <EmptyState
-          title='Nie znaleziono podróży'
-          subtitle='Wygląda na to, że nie zarezerwowałeś żadnych podróży.'
+          title='Nie znaleziono rezerwacji'
+          subtitle='Wygląda na to, że nie masz żadnych rezerwacji.'
         />
       </ClientOnly>
     );
   }
 
-  return (
-    <ClientOnly>
-      <TripsClient
-        reservations={reservations}
-        currentUser={currentUser}
-      />
-    </ClientOnly>
-  );
+  return <ClientOnly>ReservationsClient</ClientOnly>;
 };
 
-export default TripsPage;
+export default ReservationsPage;
